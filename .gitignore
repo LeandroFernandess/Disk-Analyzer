@@ -1,0 +1,56 @@
+# Relatórios gerados (CONTÊM INFORMAÇÕES SENSÍVEIS!)
+relatorio_*.txt
+relatorio_*.csv
+*.txt
+*.csv
+
+# Ambiente virtual Python
+venv/
+.venv/
+env/
+ENV/
+
+# Arquivos Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Distribuição / Empacotamento
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+
+# Testes
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos temporários
+*.tmp
+*.bak
+*.backup
