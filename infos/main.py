@@ -1,7 +1,22 @@
-import psutil
-from datetime import datetime
+"""Módulo de Informações do Sistema.
+
+Este módulo fornece funções para obter informações sobre discos,
+escanear arquivos grandes e interagir com o usuário.
+
+Funções principais:
+    get_all_disks(): Obtém lista de todos os discos disponíveis
+    scan_large_files(): Escaneia diretórios em busca de arquivos grandes
+    select_disks(): Interface para seleção de discos pelo usuário
+    get_size_in_gb(): Converte bytes para gigabytes
+"""
+
 import os
 import logging
+from datetime import datetime
+from typing import List, Dict, Any
+
+import psutil
+
 
 # Configuração do logging
 logging.basicConfig(
@@ -12,13 +27,41 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def get_size_in_gb(size_bytes):
-    """Converte bytes para GB"""
+def get_size_in_gb(size_bytes: int) -> float:
+    """Converte bytes para gigabytes.
+
+    Args:
+        size_bytes: Tamanho em bytes
+
+    Returns:
+        Tamanho em gigabytes (GB)
+
+    Example:
+        >>> get_size_in_gb(1073741824)
+        1.0
+    """
     return size_bytes / (1024**3)
 
 
-def get_all_disks():
-    """Identifica todos os discos no sistema"""
+def get_all_disks() -> List[Dict[str, Any]]:
+    """Identifica todos os discos montados no sistema.
+
+    Obtém informações detalhadas sobre cada disco/partição disponível,
+    incluindo espaço total, usado, livre e percentual de utilização.
+
+    Returns:
+        Lista de dicionários contendo informações dos discos:
+        - drive: Letra/identificador do disco (ex: 'C:\\')
+        - mountpoint: Ponto de montagem
+        - fstype: Sistema de arquivos (NTFS, FAT32, etc)
+        - total_gb: Tamanho total em GB
+        - used_gb: Espaço usado em GB
+        - free_gb: Espaço livre em GB
+        - percent: Percentual de uso
+
+    Note:
+        Discos sem permissão de acesso são ignorados silenciosamente.
+    """
     disks = []
     partitions = psutil.disk_partitions()
 
@@ -42,12 +85,38 @@ def get_all_disks():
     return disks
 
 
-def scan_large_files(path, min_size_gb=0.1, max_files=100, fast_mode=False):
-    """
-    Escaneia um caminho e retorna os arquivos maiores
-    min_size_gb: tamanho mínimo em GB para considerar
-    max_files: quantidade máxima de arquivos a retornar
-    fast_mode: se True, ignora mais pastas para acelerar
+def scan_large_files(
+    path: str, min_size_gb: float = 0.1, max_files: int = 100, fast_mode: bool = False
+) -> List[Dict[str, Any]]:
+    """Escaneia um diretório recursivamente em busca de arquivos grandes.
+
+    Percorre toda a estrutura de diretórios a partir do caminho especificado,
+    identificando arquivos que excedem o tamanho mínimo definido. Ignora
+    automaticamente pastas de sistema e temporárias.
+
+    Args:
+        path: Caminho raiz para iniciar o escaneamento
+        min_size_gb: Tamanho mínimo em GB para considerar (padrão: 0.1)
+        max_files: Quantidade máxima de arquivos a retornar (padrão: 100)
+        fast_mode: Se True, ignora pastas de usuário para acelerar (padrão: False)
+
+    Returns:
+        Lista de dicionários com informações dos arquivos encontrados:
+        - path: Caminho completo do arquivo
+        - size_gb: Tamanho em GB
+        - size_bytes: Tamanho em bytes
+        - modified: Data de modificação (formato: YYYY-MM-DD HH:MM:SS)
+
+    Note:
+        - Arquivos >= 5GB são reportados imediatamente no log
+        - Progresso é exibido a cada 100 pastas ou 5000 arquivos
+        - Pastas de sistema são automaticamente ignoradas
+        - Links simbólicos são pulados para evitar loops
+        - Erros de permissão são tratados silenciosamente
+
+    Example:
+        >>> files = scan_large_files('C:\\\\', min_size_gb=1.0, max_files=50)
+        >>> print(f"Encontrados {len(files)} arquivos grandes")
     """
     large_files = []
     min_size_bytes = min_size_gb * (1024**3)
@@ -177,8 +246,32 @@ def scan_large_files(path, min_size_gb=0.1, max_files=100, fast_mode=False):
     return large_files[:max_files]
 
 
-def select_disks(disks):
-    """Permite o usuário selecionar quais discos escanear"""
+def select_disks(disks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Interface interativa para seleção de discos pelo usuário.
+
+    Exibe lista formatada de discos disponíveis e permite que o usuário
+    selecione quais discos deseja escanear, seja individualmente ou todos.
+
+    Args:
+        disks: Lista de discos obtida por get_all_disks()
+
+    Returns:
+        Lista de discos selecionados pelo usuário
+
+    Raises:
+        ValueError: Se a entrada do usuário for inválida
+
+    Note:
+        - Digite '0' para selecionar todos os discos
+        - Digite números separados por vírgula (ex: 1,2,3)
+        - A função valida se os índices são válidos
+        - Entradas inválidas solicitam nova tentativa
+
+    Example:
+        >>> disks = get_all_disks()
+        >>> selected = select_disks(disks)  # Usuário digita: 1,2
+        >>> print(f"{len(selected)} discos selecionados")
+    """
     print("\n" + "=" * 80)
     print("SELEÇÃO DE DISCOS")
     print("=" * 80)

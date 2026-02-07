@@ -1,8 +1,43 @@
+"""Módulo Gerador de Relatórios.
+
+Este módulo contém funções para gerar relatórios de análise de discos
+em diferentes formatos (TXT e CSV).
+
+Funções:
+    generate_report(): Gera relatório detalhado em formato texto
+    generate_csv_report(): Gera relatório em formato CSV para Excel
+"""
+
+import csv
 from datetime import datetime
+from typing import List, Dict, Any
 
 
-def generate_report(disks, all_large_files, output_file="relatorio_discos.txt"):
-    """Gera um relatório detalhado em arquivo de texto"""
+def generate_report(
+    disks: List[Dict[str, Any]], 
+    all_large_files: List[Dict[str, Any]], 
+    output_file: str = "relatorio_discos.txt"
+) -> None:
+    """Gera relatório detalhado de análise em formato texto.
+    
+    Cria um arquivo de texto formatado contendo informações sobre
+    os discos analisados e lista dos arquivos grandes encontrados.
+    
+    Args:
+        disks: Lista de discos analisados
+        all_large_files: Lista de arquivos grandes encontrados
+        output_file: Nome do arquivo de saída (padrão: 'relatorio_discos.txt')
+        
+    Returns:
+        None
+        
+    Note:
+        O arquivo é salvo com codificação UTF-8 no diretório atual.
+        O relatório inclui:
+        - Data e hora da análise
+        - Informações detalhadas de cada disco
+        - Lista ordenada dos arquivos mais pesados
+    """
 
     with open(output_file, "w", encoding="utf-8") as f:
         f.write("=" * 80 + "\n")
@@ -44,9 +79,28 @@ def generate_report(disks, all_large_files, output_file="relatorio_discos.txt"):
     print(f"\nRelatório salvo em: {output_file}")
 
 
-def generate_csv_report(all_large_files, output_file="relatorio_arquivos.csv"):
-    """Gera um relatório CSV para fácil manipulação"""
-    import csv
+def generate_csv_report(
+    all_large_files: List[Dict[str, Any]], 
+    output_file: str = "relatorio_arquivos.csv"
+) -> None:
+    """Gera relatório em formato CSV para análise em planilhas.
+    
+    Cria arquivo CSV compatível com Excel e outras ferramentas de planilha,
+    contendo lista de arquivos grandes com tamanho e informações.
+    
+    Args:
+        all_large_files: Lista de arquivos grandes encontrados
+        output_file: Nome do arquivo CSV (padrão: 'relatorio_arquivos.csv')
+        
+    Returns:
+        None
+        
+    Note:
+        - O arquivo é salvo com codificação UTF-8
+        - Colunas: Tamanho (GB), Caminho, Data de Modificação
+        - Formato CSV padrão compatível com Excel
+        - Pode ser aberto em Excel, Google Sheets, LibreOffice, etc
+    """
 
     with open(output_file, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)

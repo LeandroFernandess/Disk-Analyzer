@@ -1,6 +1,20 @@
+"""Disk Analyzer - Analisador de Discos e Arquivos Grandes.
+
+Este módulo fornece funcionalidade para identificar e analisar discos
+no sistema, localizando arquivos grandes que ocupam espaço significativo.
+
+Principal função:
+    analyzer(): Executa o fluxo completo de análise de discos
+
+Exemplo:
+    >>> python disk_analyzer.py
+"""
+
 import time
 import logging
 from datetime import timedelta
+from typing import NoReturn
+
 from generators.main import generate_report, generate_csv_report
 from infos.main import get_all_disks, scan_large_files, select_disks
 
@@ -14,7 +28,28 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 
-def analyzer():
+def analyzer() -> None:
+    """Executa o analisador de discos completo.
+    
+    Esta função orquestra todo o processo de análise:
+    1. Identifica discos disponíveis no sistema
+    2. Permite seleção de discos específicos
+    3. Configura parâmetros de busca (tamanho mínimo, modo)
+    4. Escaneia discos em busca de arquivos grandes
+    5. Gera relatórios em formato TXT e CSV
+    6. Exibe estatísticas e tempo de execução
+    
+    Raises:
+        KeyboardInterrupt: Se o usuário cancelar a operação (Ctrl+C)
+        Exception: Qualquer erro durante a execução
+    
+    Returns:
+        None
+        
+    Note:
+        Os relatórios são salvos como 'relatorio_discos.txt' e
+        'relatorio_arquivos.csv' no diretório atual.
+    """
     start_time = time.time()
 
     print("=" * 80)
@@ -33,15 +68,12 @@ def analyzer():
             f"  • {disk['drive']} - {disk['used_gb']:.2f} GB usado de {disk['total_gb']:.2f} GB ({disk['percent']}%)"
         )
 
-    # Seleção de discos
     selected_disks = select_disks(disks)
 
-    # Pergunta configurações
     print("\n" + "-" * 80)
     print("CONFIGURAÇÕES")
     print("-" * 80)
 
-    # Modo de escaneamento
     print("\nModo de escaneamento:")
     print("  [1] Rápido - Escaneia apenas pastas principais (recomendado)")
     print("  [2] Completo - Escaneia todas as pastas (mais demorado)")
@@ -54,7 +86,6 @@ def analyzer():
     logger.info(f"Modo selecionado: {mode_name}")
     print(f"✓ Modo {mode_name} selecionado")
 
-    # Tamanho mínimo baseado no modo
     if is_fast_mode:
         default_min = "1.0"
         print("\n💡 Dica: No modo rápido, recomendamos buscar arquivos >= 1.0 GB")
@@ -71,7 +102,6 @@ def analyzer():
     max_files = int(max_files) if max_files else 50
     logger.info(f"Máximo de arquivos por disco: {max_files}")
 
-    # Escaneia cada disco
     all_large_files = []
 
     print("\n" + "=" * 80)
@@ -109,11 +139,9 @@ def analyzer():
     scan_elapsed = time.time() - scan_start_time
     logger.info(f"Escaneamento concluído em {scan_elapsed:.1f}s")
 
-    # Ordena todos os arquivos
     logger.info("Ordenando arquivos por tamanho...")
     all_large_files.sort(key=lambda x: x["size_bytes"], reverse=True)
 
-    # Limita o total de arquivos no relatório final
     total_limit = max_files * len(selected_disks)
     all_large_files = all_large_files[:total_limit]
     logger.info(
@@ -125,14 +153,12 @@ def analyzer():
     print("=" * 80)
     logger.info("Iniciando geração de relatórios...")
 
-    # Gera os relatórios
     report_start = time.time()
     generate_report(selected_disks, all_large_files)
     generate_csv_report(all_large_files)
     report_elapsed = time.time() - report_start
     logger.info(f"Relatórios gerados em {report_elapsed:.1f}s")
 
-    # Tempo total
     total_elapsed = time.time() - start_time
     total_time_str = str(timedelta(seconds=int(total_elapsed)))
 
