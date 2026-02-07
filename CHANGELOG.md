@@ -8,6 +8,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [1.0.0] - 2026-02-07
 
 ### ✨ Adicionado
+- **Ponto de entrada dedicado** (`main.py`) para melhor organização
 - Sistema de seleção interativa de discos
 - Modo Rápido e Modo Completo de escaneamento
 - Logging profissional com timestamps
@@ -20,6 +21,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Documentação completa no README.md
 - Guia de contribuição (CONTRIBUTING.md)
 - Licença MIT
+- Arquivo `__init__.py` na raiz do projeto
 
 ### 🎯 Características Principais
 - Identificação automática de todos os discos

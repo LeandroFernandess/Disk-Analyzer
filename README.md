@@ -90,6 +90,12 @@ pip install -r requirements.txt
 ### Execução Básica
 
 ```bash
+python main.py
+```
+
+Ou diretamente pelo módulo:
+
+```bash
 python disk_analyzer.py
 ```
 
@@ -129,7 +135,8 @@ python disk_analyzer.py
 ```
 cleaner/
 │
-├── disk_analyzer.py          # Script principal de execução
+├── main.py                    # ⭐ Ponto de entrada principal
+├── disk_analyzer.py           # Script de análise de discos
 │
 ├── infos/                     # Módulo de informações do sistema
 │   ├── __init__.py
@@ -142,6 +149,12 @@ cleaner/
 ├── requirements.txt           # Dependências do projeto
 ├── .gitignore                # Arquivos ignorados pelo Git
 ├── README.md                 # Esta documentação
+├── LICENSE                   # Licença MIT
+├── CONTRIBUTING.md           # Guia de contribuição
+├── CHANGELOG.md              # Histórico de versões
+├── setup.py                  # Configuração de instalação
+├── pyproject.toml            # Configuração moderna
+├── .editorconfig             # Padronização de editores
 │
 └── venv/                     # Ambiente virtual (não versionado)
 ```
@@ -245,6 +258,14 @@ Resultado: Tempo variável, feedback em tempo real
 ### Exemplo 3: Uso Programático
 
 ```python
+# Opção 1: Usar a função principal
+from main import main
+
+main()  # Executa o analisador interativo completo
+```
+
+```python
+# Opção 2: Usar os módulos diretamente
 from infos.main import get_all_disks, scan_large_files
 from generators.main import generate_report, generate_csv_report
 

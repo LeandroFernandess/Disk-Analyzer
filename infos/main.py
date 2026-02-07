@@ -121,7 +121,6 @@ def scan_large_files(
     large_files = []
     min_size_bytes = min_size_gb * (1024**3)
 
-    # Contadores de progresso
     files_scanned = 0
     dirs_scanned = 0
     large_files_found = 0
@@ -133,7 +132,6 @@ def scan_large_files(
 
     try:
         for root, dirs, files in os.walk(path):
-            # Lista base de pastas ignoradas
             ignored_folders = [
                 "system volume information",
                 "$recycle.bin",
@@ -162,7 +160,6 @@ def scan_large_files(
                 "bin",
             ]
 
-            # No modo rápido, ignora ainda mais pastas
             if fast_mode:
                 ignored_folders.extend(
                     [
@@ -183,12 +180,10 @@ def scan_large_files(
                     ]
                 )
 
-            # Ignora pastas de sistema sensíveis e pastas comuns grandes
             dirs[:] = [d for d in dirs if d.lower() not in ignored_folders]
 
             dirs_scanned += 1
 
-            # Mostra progresso a cada 100 pastas ou 5000 arquivos
             if dirs_scanned % 100 == 0 or (files_scanned - last_log) >= 5000:
                 logger.info(
                     f"   Progresso: {dirs_scanned} pastas | {files_scanned} arquivos | {large_files_found} grandes encontrados"
@@ -201,7 +196,6 @@ def scan_large_files(
                 try:
                     file_path = os.path.join(root, file)
 
-                    # Pula arquivos de sistema e links simbólicos
                     if os.path.islink(file_path):
                         continue
 
@@ -220,7 +214,6 @@ def scan_large_files(
                         )
                         large_files_found += 1
 
-                        # Log imediato para arquivos muito grandes (>= 5GB)
                         if get_size_in_gb(size) >= 5.0:
                             logger.info(
                                 f"   → Arquivo grande encontrado: {get_size_in_gb(size):.2f} GB - {file}"
@@ -233,7 +226,6 @@ def scan_large_files(
     except (PermissionError, OSError) as e:
         logger.error(f"Erro ao acessar {path}: {e}")
 
-    # Log final do escaneamento
     logger.info(
         f"Escaneamento concluído: {files_scanned} arquivos em {dirs_scanned} pastas"
     )
@@ -241,7 +233,6 @@ def scan_large_files(
     if errors_count > 0:
         logger.warning(f"   • Arquivos sem permissão/erro: {errors_count}")
 
-    # Ordena por tamanho (maior primeiro) e limita a quantidade
     large_files.sort(key=lambda x: x["size_bytes"], reverse=True)
     return large_files[:max_files]
 
@@ -302,10 +293,8 @@ def select_disks(disks: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
                 logger.info(f"Todos os {len(disks)} discos foram selecionados")
                 return disks
 
-            # Parse da seleção
             selected_indices = [int(x.strip()) for x in selection.split(",")]
 
-            # Valida os índices
             if any(idx < 1 or idx > len(disks) for idx in selected_indices):
                 print(f"❌ Erro: Digite números entre 1 e {len(disks)}")
                 continue

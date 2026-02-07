@@ -42,7 +42,7 @@ Changelog = "https://github.com/seu-usuario/cleaner/blob/main/CHANGELOG.md"
 "Bug Tracker" = "https://github.com/seu-usuario/cleaner/issues"
 
 [project.scripts]
-disk-analyzer = "disk_analyzer:analyzer"
+disk-analyzer = "main:main"
 
 [tool.black]
 line-length = 88

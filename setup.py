@@ -44,7 +44,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "disk-analyzer=disk_analyzer:analyzer",
+            "disk-analyzer=main:main",
         ],
     },
     project_urls={

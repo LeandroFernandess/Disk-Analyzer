@@ -7,13 +7,16 @@ Principal função:
     analyzer(): Executa o fluxo completo de análise de discos
 
 Exemplo:
-    >>> python disk_analyzer.py
+    >>> from disk_analyzer import analyzer
+    >>> analyzer()
+    
+    Ou execute diretamente:
+    >>> python main.py
 """
 
 import time
 import logging
 from datetime import timedelta
-from typing import NoReturn
 
 from generators.main import generate_report, generate_csv_report
 from infos.main import get_all_disks, scan_large_files, select_disks
@@ -30,7 +33,7 @@ logger = logging.getLogger(__name__)
 
 def analyzer() -> None:
     """Executa o analisador de discos completo.
-    
+
     Esta função orquestra todo o processo de análise:
     1. Identifica discos disponíveis no sistema
     2. Permite seleção de discos específicos
@@ -38,14 +41,14 @@ def analyzer() -> None:
     4. Escaneia discos em busca de arquivos grandes
     5. Gera relatórios em formato TXT e CSV
     6. Exibe estatísticas e tempo de execução
-    
+
     Raises:
         KeyboardInterrupt: Se o usuário cancelar a operação (Ctrl+C)
         Exception: Qualquer erro durante a execução
-    
+
     Returns:
         None
-        
+
     Note:
         Os relatórios são salvos como 'relatorio_discos.txt' e
         'relatorio_arquivos.csv' no diretório atual.
@@ -177,17 +180,3 @@ def analyzer() -> None:
 
     logger.info(f"Execução completa em {total_time_str}")
     print("\n" + "=" * 80)
-
-
-if __name__ == "__main__":
-    try:
-        analyzer()
-    except KeyboardInterrupt:
-        print("\n\n⚠ Operação cancelada pelo usuário.")
-        logger.warning("Operação cancelada pelo usuário")
-    except Exception as e:
-        print(f"\n\n❌ Erro: {e}")
-        logger.error(f"Erro durante a execução: {e}", exc_info=True)
-        import traceback
-
-        traceback.print_exc()
