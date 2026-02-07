@@ -266,5 +266,5 @@ Já configurado em `.editorconfig`:
 
 ---
 
-**Última atualização:** 2026-02-07
+**Última atualização:** 07/02/2026
 **Versão do projeto:** 1.0.0
