@@ -8,7 +8,7 @@ Obrigado por considerar contribuir para o Disk Analyzer! 🎉
 
 Se você encontrou um bug:
 
-1. Verifique se já não existe uma [issue](https://github.com/seu-usuario/cleaner/issues) aberta
+1. Verifique se já não existe uma [issue](https://github.com/LeandroFernandess/Disk-Analyzer/issues) aberta
 2. Crie uma nova issue incluindo:
    - Descrição clara do problema
    - Passos para reproduzir
@@ -34,6 +34,13 @@ Para sugerir novas funcionalidades:
 # 2. Clone seu fork
 git clone https://github.com/seu-usuario/cleaner.git
 cd cleaner
+
+# Estrutura do projeto:
+# cleaner/
+# ├── main.py          (ponto de entrada)
+# ├── analyzer/        (lógica de análise)
+# ├── infos/           (informações do sistema)
+# └── generators/      (geração de relatórios)
 
 # 3. Crie um ambiente virtual
 python -m venv venv

@@ -20,6 +20,8 @@ Script Python profissional para identificar discos no computador e localizar arq
 - [Contribuindo](#-contribuindo)
 - [Licença](#-licença)
 
+> 📖 Para detalhes completos da estrutura e arquitetura, veja [STRUCTURE.md](STRUCTURE.md)
+
 ## ✨ Características
 
 ### Funcionalidades Principais
@@ -136,27 +138,34 @@ python disk_analyzer.py
 cleaner/
 │
 ├── main.py                    # ⭐ Ponto de entrada principal
-├── disk_analyzer.py           # Script de análise de discos
+├── __init__.py                # Exportações do pacote raiz
 │
-├── infos/                     # Módulo de informações do sistema
+├── analyzer/                  # 🔍 Módulo de análise
 │   ├── __init__.py
-│   └── main.py               # Funções de disco e escaneamento
+│   ├── disk_analyzer.py       # Função principal de análise
+│   └── README.md              # Documentação do módulo
 │
-├── generators/                # Módulo de geração de relatórios  
+├── infos/                     # 📊 Módulo de informações do sistema
 │   ├── __init__.py
-│   └── main.py               # Geradores TXT e CSV
+│   ├── main.py                # Funções de disco e escaneamento
+│   └── README.md              # Documentação do módulo
+│
+├── generators/                # 📝 Módulo de geração de relatórios  
+│   ├── __init__.py
+│   ├── main.py                # Geradores TXT e CSV
+│   └── README.md              # Documentação do módulo
 │
 ├── requirements.txt           # Dependências do projeto
-├── .gitignore                # Arquivos ignorados pelo Git
-├── README.md                 # Esta documentação
-├── LICENSE                   # Licença MIT
-├── CONTRIBUTING.md           # Guia de contribuição
-├── CHANGELOG.md              # Histórico de versões
-├── setup.py                  # Configuração de instalação
-├── pyproject.toml            # Configuração moderna
-├── .editorconfig             # Padronização de editores
+├── .gitignore                 # Arquivos ignorados pelo Git
+├── README.md                  # Esta documentação
+├── LICENSE                    # Licença MIT
+├── CONTRIBUTING.md            # Guia de contribuição
+├── CHANGELOG.md               # Histórico de versões
+├── setup.py                   # Configuração de instalação
+├── pyproject.toml             # Configuração moderna
+├── .editorconfig              # Padronização de editores
 │
-└── venv/                     # Ambiente virtual (não versionado)
+└── venv/                      # Ambiente virtual (não versionado)
 ```
 
 ## 📚 Documentação da API
@@ -344,16 +353,6 @@ O `.gitignore` já está configurado para proteger:
 3. **SEMPRE** revise antes de compartilhar
 4. Anonimize caminhos se necessário compartilhar exemplos
 
-## 🤝 Contribuindo
-
-Contribuições são bem-vindas! Por favor:
-
-1. Fork o projeto
-2. Crie uma branch (`git checkout -b feature/nova-funcionalidade`)
-3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
-4. Push para a branch (`git push origin feature/nova-funcionalidade`)
-5. Abra um Pull Request
-
 ### Padrões de Código
 
 - Siga PEP 8 (estilo Python)
@@ -367,17 +366,13 @@ Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalh
 
 ## 👤 Autor
 
-Desenvolvido com ❤️ por **GitHub Copilot**
+Desenvolvido por **Leandro Fernandes**
 
 ## 🆘 Suporte
 
 Encontrou um bug ou tem uma sugestão?
-- Abra uma [Issue](https://github.com/seu-usuario/cleaner/issues)
-- Entre em contato através do [email]
-
-## 📊 Status do Projeto
-
-✅ **Estável** - Pronto para uso em produção
+- Abra uma issue [https://github.com/LeandroFernandess/Disk-Analyzer/issues]
+- Entre em contato através do e-mail [leandrofernandes1600@gmail.com]
 
 ---
 

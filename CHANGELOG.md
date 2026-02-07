@@ -8,6 +8,7 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 ## [1.0.0] - 2026-02-07
 
 ### ✨ Adicionado
+- **Estrutura modular aprimorada** com pasta `analyzer/` dedicada
 - **Ponto de entrada dedicado** (`main.py`) para melhor organização
 - Sistema de seleção interativa de discos
 - Modo Rápido e Modo Completo de escaneamento
@@ -50,10 +51,11 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - Changelog para rastrear versões
 
 ### 🔧 Módulos
-- `disk_analyzer.py`: Script principal
-- `infos.main`: Funções de sistema e escaneamento
-- `generators.main`: Geradores de relatórios
-- Estrutura modular com `__init__.py`
+- `analyzer/`: Módulo de análise de discos
+  - `disk_analyzer.py`: Função principal de análise
+- `infos/`: Funções de sistema e escaneamento
+- `generators/`: Geradores de relatórios
+- Estrutura modular completa com `__init__.py` em todos os módulos
 
 ## [0.1.0] - 2026-02-07 (Beta Inicial)
 

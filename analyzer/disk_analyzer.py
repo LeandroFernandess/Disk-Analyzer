@@ -9,7 +9,7 @@ Principal função:
 Exemplo:
     >>> from disk_analyzer import analyzer
     >>> analyzer()
-    
+
     Ou execute diretamente:
     >>> python main.py
 """

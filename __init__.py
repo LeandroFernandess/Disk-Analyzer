@@ -31,7 +31,7 @@ __author__ = "Leandro Fernandes"
 __license__ = "MIT"
 
 # Exportações principais
-from disk_analyzer import analyzer
+from analyzer.disk_analyzer import analyzer
 from main import main
 
 __all__ = ["main", "analyzer", "__version__", "__author__", "__license__"]

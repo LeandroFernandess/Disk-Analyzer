@@ -10,7 +10,7 @@ Usage:
 import logging
 import traceback
 
-from disk_analyzer import analyzer
+from analyzer.disk_analyzer import analyzer
 
 
 # Configuração do logging
