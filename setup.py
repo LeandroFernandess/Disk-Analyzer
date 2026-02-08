@@ -15,7 +15,7 @@ setup(
     description="Analisador de discos e arquivos grandes para otimização de armazenamento",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/seu-usuario/cleaner",
+    url="https://github.com/LeandroFernandess/Disk-Analyzer",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -48,9 +48,9 @@ setup(
         ],
     },
     project_urls={
-        "Bug Reports": "https://github.com/seu-usuario/cleaner/issues",
-        "Source": "https://github.com/seu-usuario/cleaner",
-        "Documentation": "https://github.com/seu-usuario/cleaner#readme",
-        "Changelog": "https://github.com/seu-usuario/cleaner/blob/main/CHANGELOG.md",
+        "Bug Reports": "https://github.com/LeandroFernandess/Disk-Analyzer/issues",
+        "Source": "https://github.com/LeandroFernandess/Disk-Analyzer",
+        "Documentation": "https://github.com/LeandroFernandess/Disk-Analyzer#readme",
+        "Changelog": "https://github.com/LeandroFernandess/Disk-Analyzer/blob/main/CHANGELOG.md",
     },
 )

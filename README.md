@@ -65,7 +65,7 @@ psutil>=5.9.0
 ### 1. Clone o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/cleaner.git
+git clone https://github.com/LeandroFernandess/Disk-Analyzer.git
 cd cleaner
 ```
 

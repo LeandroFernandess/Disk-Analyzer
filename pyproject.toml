@@ -35,18 +35,18 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/seu-usuario/cleaner"
-Documentation = "https://github.com/seu-usuario/cleaner#readme"
-Repository = "https://github.com/seu-usuario/cleaner"
-Changelog = "https://github.com/seu-usuario/cleaner/blob/main/CHANGELOG.md"
-"Bug Tracker" = "https://github.com/seu-usuario/cleaner/issues"
+Homepage = "https://github.com/LeandroFernandess/Disk-Analyzer"
+Documentation = "https://github.com/LeandroFernandess/Disk-Analyzer#readme"
+Repository = "https://github.com/LeandroFernandess/Disk-Analyzer"
+Changelog = "https://github.com/LeandroFernandess/Disk-Analyzer/blob/main/CHANGELOG.md"
+"Bug Tracker" = "https://github.com/LeandroFernandess/Disk-Analyzer/issues"
 
 [project.scripts]
 disk-analyzer = "main:main"
 
 [tool.black]
 line-length = 88
-target-version = ['py36', 'py37', 'py38', 'py39', 'py310', 'py311']
+target-version = ['py36', 'py37', 'py38', 'py39', 'py310', 'py311', 'py312']
 include = '\.pyi?$'
 extend-exclude = '''
 /(

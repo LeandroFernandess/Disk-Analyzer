@@ -75,8 +75,3 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 - `🔒 Segurança`: para vulnerabilidades
 - `📚 Documentação`: para mudanças apenas em documentação
 - `⚡ Performance`: para melhorias de performance
-
----
-
-[1.0.0]: https://github.com/seu-usuario/cleaner/releases/tag/v1.0.0
-[0.1.0]: https://github.com/seu-usuario/cleaner/releases/tag/v0.1.0

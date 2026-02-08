@@ -32,7 +32,7 @@ Para sugerir novas funcionalidades:
 ```bash
 # 1. Fork o repositório
 # 2. Clone seu fork
-git clone https://github.com/seu-usuario/cleaner.git
+git https://github.com/LeandroFernandess/Disk-Analyzer.git
 cd cleaner
 
 # Estrutura do projeto:
